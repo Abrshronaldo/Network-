@@ -78,10 +78,42 @@ params.bottomMargin=0;
 params.rightMargin=0;
 tv.setLayoutParams(params); 
 
-                                                                 
+
+
+
+ConstraintLayout.LayoutParams buttonParams = new ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+    );
+
+    // Positioning: center in parent
+    buttonParams.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID;
+    buttonParams.rightToRight = ConstraintLayout.LayoutParams.PARENT_ID;
+    buttonParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+
+    // Create the Button
+    Button myButton = new Button(this);
+    myButton.setId(View.generateViewId()); // Important for constraints
+    myButton.setText("Click Me");
+
+    // Add click listener
+    myButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+   tv.setText("yo made it!");        
+
+}
+    });
+
+     myButton.setLayoutParams(buttonParams);
+
+    // Apply params and add to layout
+    layout.addView(myButton);                                                                 
 
  
 //layout.addView(lineview);
+
+
 
 
     layout.addView(tv);
