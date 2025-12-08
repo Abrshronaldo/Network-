@@ -106,8 +106,8 @@ myButton.setOnClickListener(new View.OnClickListener() {
     public void onClick(View v) {
         new Thread(() -> {
             try {
-                ServerSocket serverSocket = new ServerSocket(5000);
-                runOnUiThread(() -> tv.setText("Server running on localhost:5000"));
+                ServerSocket serverSocket = new ServerSocket(8080);
+         runOnUiThread(() -> tv.setText("Server running on localhost:5000"));
 
                 Socket clientSocket = serverSocket.accept(); // blocks until client connects
                 BufferedReader in = new BufferedReader(
