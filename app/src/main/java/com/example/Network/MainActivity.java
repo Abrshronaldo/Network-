@@ -5,7 +5,8 @@ import androidx.core.content.ContextCompat;
 import android.view.WindowManager;
 import android.graphics.drawable.Drawable;
 import androidx.core.content.ContextCompat;
-
+import java.io.*;
+import java.net.*;
 
 import android.view.Gravity;
 import android.widget.ImageView;
@@ -96,14 +97,35 @@ ConstraintLayout.LayoutParams buttonParams = new ConstraintLayout.LayoutParams(
     myButton.setId(View.generateViewId()); // Important for constraints
     myButton.setText("Click Me");
 
-    // Add click listener
-    myButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-   tv.setText("yo made it!");        
+     buttonParams.topMargin=360; 
 
-}
-    });
+   
+
+myButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        new Thread(() -> {
+            try {
+                ServerSocket serverSocket = new ServerSocket(5000);
+                runOnUiThread(() -> tv.setText("Server running on localhost:5000"));
+
+                Socket clientSocket = serverSocket.accept(); // blocks until client connects
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(clientSocket.getInputStream())
+                );
+                String message = in.readLine();
+
+                runOnUiThread(() -> tv.setText("Received: " + message));
+
+                clientSocket.close();
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+});
+    
 
      myButton.setLayoutParams(buttonParams);
 
