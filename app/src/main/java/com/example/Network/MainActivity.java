@@ -115,7 +115,11 @@ myButton.setOnClickListener(new View.OnClickListener() {
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(clientSocket.getInputStream())
                 );
-                String message = in.readLine();
+                
+
+char[] buffer = new char[1024];
+int len = in.read(buffer);
+String message = new String(buffer, 0, len);
 
                 runOnUiThread(() -> tv.setText("Received: " + message));
 
