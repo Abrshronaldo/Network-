@@ -108,7 +108,9 @@ myButton.setOnClickListener(new View.OnClickListener() {
             try {
          
 
-      runOnUiThread(() -> tv.setText("Server running on localhost:5000"));    ServerSocket serverSocket = new ServerSocket(8080);
+      runOnUiThread(() -> tv.setText("Server running on  8080"));    ServerSocket serverSocket = new ServerSocket(8080);
+
+          ServerSocket serverSocket = new ServerSocket(8080); 
          
 
                 Socket clientSocket = serverSocket.accept(); // blocks until client connects
@@ -121,7 +123,19 @@ char[] buffer = new char[1024];
 int len = in.read(buffer);
 String message = new String(buffer, 0, len);
 
-                runOnUiThread(() -> tv.setText("Received: " + message));
+       if (message.equals("Go"){
+
+
+                runOnUiThread(() -> tv.setText("it was all a dreeam"));
+             }
+
+          Socket socket = new Socket("127.0.0.1", 8080);
+
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        out.println("Go");
+        socket.close();
+
+        runOnUiThread(() -> tv.setText("sent: "));
 
                 clientSocket.close();
                 serverSocket.close();
