@@ -108,9 +108,8 @@ myButton.setOnClickListener(new View.OnClickListener() {
             try {
          
 
-      runOnUiThread(() -> tv.setText("Server running on  8080"));    ServerSocket serverSocket = new ServerSocket(8080);
-
-          ServerSocket serverSocket = new ServerSocket(8080); 
+      runOnUiThread(() -> tv.setText("Server running on  8080"));
+              ServerSocket serverSocket = new ServerSocket(8080); 
          
 
                 Socket clientSocket = serverSocket.accept(); // blocks until client connects
