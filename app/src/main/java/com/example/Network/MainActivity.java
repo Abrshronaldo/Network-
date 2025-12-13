@@ -128,15 +128,13 @@ String message = new String(buffer, 0, len);
                 runOnUiThread(() -> tv.setText("it was all a dreeam"));
              }
 
-          Socket socket = new Socket("127.0.0.1", 8080);
+          Socket socket = new Socket("127.0.0.1", 5000);
 
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         out.println("Go");
         socket.close();
 
-        runOnUiThread(() -> tv.setText("sent: "));
-
-                clientSocket.close();
+                      clientSocket.close();
                 serverSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
