@@ -113,21 +113,17 @@ myButton.setOnClickListener(new View.OnClickListener() {
          
 
                 Socket clientSocket = serverSocket.accept(); // blocks until client connects
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(clientSocket.getInputStream())
-                );
-                
-
-char[] buffer = new char[1024];
-int len = in.read(buffer);
-String message = new String(buffer, 0, len);
-
-       if (message.equals("Go")){
+             
 
 
-                runOnUiThread(() -> tv.setText("it was all a dreeam"));
-             }
+BufferedReader in = new BufferedReader(
+        new InputStreamReader(clientSocket.getInputStream())
+);
 
+String message = in.readLine();  // reads until newline
+if ("Go".equals(message)) {
+    runOnUiThread(() -> tv.setText("it was all a dreeam"));
+}
           Socket socket = new Socket("127.0.0.1", 5000);
 
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
